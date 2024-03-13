@@ -1,4 +1,9 @@
 export class User {
+  constructor(
+    private readonly _id: string,
+    private readonly _password: string,
+  ) {}
+
   static create(id: string, password: string): User {
     if (password.length < 8)
       throw new UserPasswordValidationError(
@@ -14,7 +19,15 @@ export class User {
       throw new UserIdValidationError(
         `아이디는 특수문자를 사용할 수 없습니다.`,
       );
-    return new User();
+    return new User(id, password);
+  }
+
+  get password(): string {
+    return this._password;
+  }
+
+  get id(): string {
+    return this._id;
   }
 }
 
@@ -90,5 +103,17 @@ describe(`유저 도메인`, () => {
       ),
     );
   });
-  it(`⭕️ 유저를 생성할 수 있음`, () => {});
+  it(`⭕️ 유저를 생성할 수 있음`, () => {
+    // given
+    const id = 'test1234';
+    const password = 'test@1234!';
+
+    // when
+    const newUser = User.create(id, password);
+
+    // then
+    expect(newUser).not.toBeNull();
+    expect(newUser.id).toBe(id);
+    expect(newUser.password).toBe(password);
+  });
 });
