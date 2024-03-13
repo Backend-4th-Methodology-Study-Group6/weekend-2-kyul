@@ -1,7 +1,7 @@
 export class User {
   static create(id: string, password: string): User {
     if (id.length < 8) throw Error(`아이디는 8자 이상이어야 합니다.`);
-    if (/[^a-zA-Z0-9]/gi.exec(id))
+    if (/[^\w]/gi.exec(id))
       throw Error(`아이디는 특수문자를 사용할 수 없습니다.`);
     return new User();
   }
@@ -20,7 +20,7 @@ describe(`유저 도메인`, () => {
   });
   it(`❌ 유저를 생성할 수 없음 - 특수문자를 사용한 아이디`, () => {
     // given
-    const id = 'test1111@@111';
+    const id = 'test1111@@!11';
     const password = 'test123!@#';
 
     // then
