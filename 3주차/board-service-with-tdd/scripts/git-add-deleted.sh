@@ -1,1 +1,0 @@
-git add $(git status | awk '/deleted:/ {print $2}')
