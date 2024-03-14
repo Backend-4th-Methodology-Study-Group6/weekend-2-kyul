@@ -1,6 +1,6 @@
-import { User } from './User';
-import { UserMemoryRepository } from './UserMemoryRepository';
-import { UserRepository } from './UserRepository';
+import { User } from '../../../src/user/domains/user';
+import { UserMemoryRepository } from '../fake/user.memory.repository';
+import { UserRepository } from '../../../src/user/domains/user.repository';
 
 describe(`유저 레포지토리`, () => {
   const userRepository: UserRepository = new UserMemoryRepository();

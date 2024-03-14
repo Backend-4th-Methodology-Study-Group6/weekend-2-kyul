@@ -1,5 +1,5 @@
-import { UserPasswordValidationError } from './UserPasswordValidationError';
-import { UserIdValidationError } from './UserIdValidationError';
+import { UserPasswordValidationError } from '../../core/errors/user.password.validation.error';
+import { UserIdValidationError } from '../../core/errors/user.id.validation.error';
 
 export class User {
   constructor(

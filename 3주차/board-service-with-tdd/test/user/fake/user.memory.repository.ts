@@ -1,5 +1,5 @@
-import { User } from './User';
-import { UserRepository } from './UserRepository';
+import { User } from '../../../src/user/domains/user';
+import { UserRepository } from '../../../src/user/domains/user.repository';
 
 export class UserMemoryRepository implements UserRepository {
   private seq: number = 1;

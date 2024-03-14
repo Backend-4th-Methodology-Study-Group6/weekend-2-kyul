@@ -1,6 +1,6 @@
-import { User } from './User';
-import { UserIdValidationError } from './UserIdValidationError';
-import { UserPasswordValidationError } from './UserPasswordValidationError';
+import { User } from '../../../src/user/domains/user';
+import { UserIdValidationError } from '../../../src/core/errors/user.id.validation.error';
+import { UserPasswordValidationError } from '../../../src/core/errors/user.password.validation.error';
 
 describe(`유저 도메인`, () => {
   it(`❌ 유저를 생성할 수 없음 - 길이가 짧은 아이디`, () => {
