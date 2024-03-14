@@ -1,59 +1,6 @@
-export class User {
-  constructor(
-    private readonly _id: string,
-    private readonly _password: string,
-  ) {}
-
-  static create(id: string, password: string): User {
-    if (password.length < 8)
-      throw new UserPasswordValidationError(
-        `패스워드는 8자 이상이어야 합니다.`,
-      );
-    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password))
-      throw new UserPasswordValidationError(
-        `패스워드는 특수문자가 포함되어야 합니다.`,
-      );
-    if (id.length < 5)
-      throw new UserIdValidationError(`아이디는 5자 이상이어야 합니다.`);
-    if (/[^\w]/gi.exec(id))
-      throw new UserIdValidationError(
-        `아이디는 특수문자를 사용할 수 없습니다.`,
-      );
-    return new User(id, password);
-  }
-
-  get password(): string {
-    return this._password;
-  }
-
-  get id(): string {
-    return this._id;
-  }
-}
-
-export class CustomError extends Error {
-  readonly statusCode: number;
-  constructor(statusCode?: number, message?: string) {
-    super(message);
-    this.name = 'CustomError';
-    this.statusCode = statusCode | 404;
-    Object.setPrototypeOf(this, CustomError.prototype);
-  }
-}
-
-export class UserIdValidationError extends CustomError {
-  constructor(message: string) {
-    super(404, message);
-    Object.setPrototypeOf(this, UserIdValidationError.prototype);
-  }
-}
-
-export class UserPasswordValidationError extends CustomError {
-  constructor(message: string) {
-    super(404, message);
-    Object.setPrototypeOf(this, UserPasswordValidationError.prototype);
-  }
-}
+import { User } from './User';
+import { UserIdValidationError } from './UserIdValidationError';
+import { UserPasswordValidationError } from './UserPasswordValidationError';
 
 describe(`유저 도메인`, () => {
   it(`❌ 유저를 생성할 수 없음 - 길이가 짧은 아이디`, () => {
