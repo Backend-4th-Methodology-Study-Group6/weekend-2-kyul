@@ -1,17 +1,21 @@
+import { Inject, Injectable } from '@nestjs/common';
 import { User } from '../domains/user';
 import { UserRepository } from '../domains/user.repository';
 
+@Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    @Inject('UserRepository') private readonly userRepository: UserRepository,
+  ) {}
 
-  create(id: string, password: string): User {
+  async create(id: string, password: string): Promise<User> {
     let user = User.create(id, password);
-    user = this.userRepository.save(user);
+    user = await this.userRepository.save(user);
     return user;
   }
 
-  findById(id: string): User {
-    let user = this.userRepository.findById(id);
+  async findById(id: string): Promise<User> {
+    let user = await this.userRepository.findById(id);
     return user;
   }
 }

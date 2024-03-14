@@ -5,7 +5,7 @@ export class UserMemoryRepository implements UserRepository {
   private seq: number = 1;
   private userMap: Map<number, User> = new Map<number, User>();
 
-  findById(id: string): User {
+  async findById(id: string): Promise<User> {
     const users = this.userMap.values();
     let user: User;
     for (const _user of users) {
@@ -17,7 +17,7 @@ export class UserMemoryRepository implements UserRepository {
     return user;
   }
 
-  save(user: User): User {
+  async save(user: User): Promise<User> {
     this.userMap.set(this.seq, user);
     const savedUser = this.userMap.get(this.seq);
     this.seq = this.seq + 1;
